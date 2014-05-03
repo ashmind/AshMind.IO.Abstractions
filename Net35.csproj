@@ -40,7 +40,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\AdapterHelper.cs" />
+    <Compile Include="Adapters\DirectoryInfoAdapter.cs" />
+    <Compile Include="Adapters\DirectorySecurityAdapter.cs" />
+    <Compile Include="Adapters\FileInfoAdapter.cs" />
+    <Compile Include="Adapters\FileSecurityAdapter.cs" />
+    <Compile Include="Adapters\FileSystem.cs" />
+    <Compile Include="Adapters\FileSystemInfoAdapter.cs" />
+    <Compile Include="Adapters\FileSystemSecurityAdapter.cs" />
+    <Compile Include="Annotations\JetBrains.Annotations.cs" />
+    <Compile Include="Bases\DirectoryBase.cs" />
+    <Compile Include="Bases\DirectorySecurityBase.cs" />
+    <Compile Include="Bases\FileBase.cs" />
+    <Compile Include="Bases\FileSecurityBase.cs" />
+    <Compile Include="Bases\FileSystemBase.cs" />
+    <Compile Include="Bases\FileSystemInfoBase.cs" />
+    <Compile Include="Bases\FileSystemSecurityBase.cs" />
+    <Compile Include="GetOption.cs" />
+    <Compile Include="IDirectory.cs" />
+    <Compile Include="IFile.cs" />
+    <Compile Include="IFileSystem.cs" />
+    <Compile Include="IFileSystemInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\IDirectorySecurity.cs" />
+    <Compile Include="Security\IFileSecurity.cs" />
+    <Compile Include="Security\IFileSystemSecurity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

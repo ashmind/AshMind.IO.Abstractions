@@ -62,9 +62,11 @@ namespace AshMind.IO.Abstractions.Adapters {
             return Array.ConvertAll(_directoryInfo.GetFileSystemInfos(searchPattern), AdapterHelper.Adapt);
         }
 
+        #if NET40
         public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern, SearchOption searchOption) {
             return Array.ConvertAll(_directoryInfo.GetFileSystemInfos(searchPattern, searchOption), AdapterHelper.Adapt);
         }
+        #endif
 
         public virtual IFileSystemInfo[] GetFileSystemInfos() {
             return Array.ConvertAll(_directoryInfo.GetFileSystemInfos(), AdapterHelper.Adapt);
@@ -78,6 +80,7 @@ namespace AshMind.IO.Abstractions.Adapters {
             return Array.ConvertAll(_directoryInfo.GetDirectories(searchPattern, searchOption), AdapterHelper.Adapt);
         }
 
+        #if NET40
         public virtual IEnumerable<IDirectory> EnumerateDirectories() {
             return _directoryInfo.EnumerateDirectories().Select(AdapterHelper.Adapt);
         }
@@ -113,6 +116,7 @@ namespace AshMind.IO.Abstractions.Adapters {
         public virtual IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos(string searchPattern, SearchOption searchOption) {
             return _directoryInfo.EnumerateFileSystemInfos(searchPattern, searchOption).Select(AdapterHelper.Adapt);
         }
+        #endif
 
         public virtual void MoveTo(string destDirName) {
             _directoryInfo.MoveTo(destDirName);

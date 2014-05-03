@@ -140,6 +140,7 @@ namespace AshMind.IO.Abstractions.Bases {
             throw new NotImplementedException();
         }
 
+        #if NET40
         public virtual void WriteAllLines(IEnumerable<string> contents) {
             throw new NotImplementedException();
         }
@@ -147,6 +148,7 @@ namespace AshMind.IO.Abstractions.Bases {
         public virtual void WriteAllLines(IEnumerable<string> contents, Encoding encoding) {
             throw new NotImplementedException();
         }
+        #endif
 
         public virtual void WriteAllBytes(byte[] bytes) {
             throw new NotImplementedException();
@@ -160,6 +162,7 @@ namespace AshMind.IO.Abstractions.Bases {
             throw new NotImplementedException();
         }
 
+        #if NET40
         public virtual void AppendAllLines(string[] contents) {
             throw new NotImplementedException();
         }
@@ -175,5 +178,6 @@ namespace AshMind.IO.Abstractions.Bases {
         public virtual void AppendAllLines(IEnumerable<string> contents, Encoding encoding) {
             throw new NotImplementedException();
         }
+        #endif
     }
 }

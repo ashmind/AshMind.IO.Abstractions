@@ -20,10 +20,13 @@ namespace AshMind.IO.Abstractions {
         [NotNull] IFile[] GetFiles();
         [NotNull] IDirectory[] GetDirectories();
         [NotNull] IFileSystemInfo[] GetFileSystemInfos([NotNull] string searchPattern);
+        #if NET40
         [NotNull] IFileSystemInfo[] GetFileSystemInfos([NotNull] string searchPattern, SearchOption searchOption);
+        #endif
         [NotNull] IFileSystemInfo[] GetFileSystemInfos();
         [NotNull] IDirectory[] GetDirectories([NotNull] string searchPattern);
         [NotNull] IDirectory[] GetDirectories([NotNull] string searchPattern, SearchOption searchOption);
+        #if NET40
         [NotNull] IEnumerable<IDirectory> EnumerateDirectories();
         [NotNull] IEnumerable<IDirectory> EnumerateDirectories([NotNull] string searchPattern);
         [NotNull] IEnumerable<IDirectory> EnumerateDirectories([NotNull] string searchPattern, SearchOption searchOption);
@@ -33,6 +36,7 @@ namespace AshMind.IO.Abstractions {
         [NotNull] IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos();
         [NotNull] IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos([NotNull] string searchPattern);
         [NotNull] IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos([NotNull] string searchPattern, SearchOption searchOption);
+        #endif
         void MoveTo([NotNull] string destDirName);
         void Delete(bool recursive);
         [CanBeNull] IDirectory Parent { get; }

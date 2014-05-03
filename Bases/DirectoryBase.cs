@@ -54,9 +54,11 @@ namespace AshMind.IO.Abstractions.Bases {
             throw new NotImplementedException();
         }
 
+        #if NET40
         public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern, SearchOption searchOption) {
             throw new NotImplementedException();
         }
+        #endif
 
         public virtual IFileSystemInfo[] GetFileSystemInfos() {
             throw new NotImplementedException();
@@ -70,6 +72,7 @@ namespace AshMind.IO.Abstractions.Bases {
             throw new NotImplementedException();
         }
 
+        #if NET40
         public virtual IEnumerable<IDirectory> EnumerateDirectories() {
             throw new NotImplementedException();
         }
@@ -105,6 +108,7 @@ namespace AshMind.IO.Abstractions.Bases {
         public virtual IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos(string searchPattern, SearchOption searchOption) {
             throw new NotImplementedException();
         }
+        #endif
 
         public virtual void MoveTo(string destDirName) {
             throw new NotImplementedException();

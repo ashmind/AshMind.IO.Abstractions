@@ -45,14 +45,18 @@ namespace AshMind.IO.Abstractions {
         void WriteAllText([CanBeNull] string contents, [NotNull] Encoding encoding);
         void WriteAllLines([NotNull] string[] contents);
         void WriteAllLines([NotNull] string[] contents, [NotNull] Encoding encoding);
+        #if NET40
         void WriteAllLines([NotNull] IEnumerable<string> contents);
         void WriteAllLines([NotNull] IEnumerable<string> contents, [NotNull] Encoding encoding);
+        #endif
         void WriteAllBytes([NotNull] byte[] bytes);
         void AppendAllText([CanBeNull] string contents);
         void AppendAllText([CanBeNull] string contents, [NotNull] Encoding encoding);
+        #if NET40
         void AppendAllLines([NotNull] string[] contents);
         void AppendAllLines([NotNull] string[] contents, [NotNull] Encoding encoding);
         void AppendAllLines([NotNull] IEnumerable<string> contents);
         void AppendAllLines([NotNull] IEnumerable<string> contents, [NotNull] Encoding encoding);
+        #endif
     }
 }

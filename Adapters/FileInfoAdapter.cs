@@ -154,6 +154,7 @@ namespace AshMind.IO.Abstractions.Adapters {
             File.WriteAllLines(_fileInfo.FullName, contents, encoding);
         }
 
+        #if NET40
         public virtual void WriteAllLines(IEnumerable<string> contents) {
             File.WriteAllLines(_fileInfo.FullName, contents);
         }
@@ -161,6 +162,7 @@ namespace AshMind.IO.Abstractions.Adapters {
         public virtual void WriteAllLines(IEnumerable<string> contents, Encoding encoding) {
             File.WriteAllLines(_fileInfo.FullName, contents, encoding);
         }
+        #endif
 
         public virtual void WriteAllBytes(byte[] bytes) {
             File.WriteAllBytes(_fileInfo.FullName, bytes);
@@ -174,6 +176,7 @@ namespace AshMind.IO.Abstractions.Adapters {
             File.AppendAllText(_fileInfo.FullName, contents, encoding);
         }
 
+        #if NET40
         public virtual void AppendAllLines(string[] contents) {
             File.AppendAllLines(_fileInfo.FullName, contents);
         }
@@ -189,5 +192,6 @@ namespace AshMind.IO.Abstractions.Adapters {
         public virtual void AppendAllLines(IEnumerable<string> contents, Encoding encoding) {
             File.AppendAllLines(_fileInfo.FullName, contents, encoding);
         }
+        #endif
     }
 }

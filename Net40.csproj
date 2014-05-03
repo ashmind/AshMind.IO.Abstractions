@@ -20,7 +20,7 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\lib\net40\</OutputPath>
     <IntermediateOutputPath>obj\Debug\lib\net45\</IntermediateOutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET40</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
@@ -64,7 +64,7 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\lib\net40\</OutputPath>
     <IntermediateOutputPath>obj\Release\lib\net45\</IntermediateOutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;NET40</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
@@ -104,10 +104,6 @@
     <DocumentationFile>bin\Release\lib\net40\AshMind.IO.Abstractions.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=6.1.0.0, Culture=neutral, PublicKeyToken=3f033448d4bb5376, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>#packages\JetBrains.Annotations.7.0\lib\net40\JetBrains.Annotations.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -129,6 +125,7 @@
     <Compile Include="Bases\DirectorySecurityBase.cs" />
     <Compile Include="Bases\FileSystemBase.cs" />
     <Compile Include="Bases\FileSystemSecurityBase.cs" />
+    <Compile Include="Annotations\JetBrains.Annotations.cs" />
     <Compile Include="Security\IFileSecurity.cs" />
     <Compile Include="Security\IDirectorySecurity.cs" />
     <Compile Include="Security\IFileSystemSecurity.cs" />
@@ -141,9 +138,6 @@
     <Compile Include="IFileSystem.cs" />
     <Compile Include="IFileSystemInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
