@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
+using AshMind.IO.Abstractions.Security;
 using JetBrains.Annotations;
 
 namespace AshMind.IO.Abstractions.Adapters {
@@ -35,6 +37,46 @@ namespace AshMind.IO.Abstractions.Adapters {
                 return new DirectoryInfoAdapter(directoryInfo);
 
             throw new NotSupportedException("Type " + fileSystemInfo.GetType() + " can not be adapted.");
+        }
+
+        [ContractAnnotation("directorySecurity:null=>null")]
+        public static IDirectorySecurity Adapt(DirectorySecurity directorySecurity) {
+            if (directorySecurity == null)
+                return null;
+
+            return new DirectorySecurityAdapter(directorySecurity);
+        }
+
+        [ContractAnnotation("directorySecurity:null=>null")]
+        public static DirectorySecurity Unwrap(IDirectorySecurity directorySecurity) {
+            if (directorySecurity == null)
+                return null;
+
+            var adapter = directorySecurity as DirectorySecurityAdapter;
+            if (adapter == null)
+                throw new InvalidOperationException("Adapter can only accept DirectorySecurityAdaper (provided " + directorySecurity.GetType().Name + ").");
+
+            return adapter.Security;
+        }
+
+        [ContractAnnotation("fileSecurity:null=>null")]
+        public static IFileSecurity Adapt(FileSecurity fileSecurity) {
+            if (fileSecurity == null)
+                return null;
+
+            return new FileSecurityAdapter(fileSecurity);
+        }
+
+        [ContractAnnotation("fileSecurity:null=>null")]
+        public static FileSecurity Unwrap(IFileSecurity fileSecurity) {
+            if (fileSecurity == null)
+                return null;
+
+            var adapter = fileSecurity as FileSecurityAdapter;
+            if (adapter == null)
+                throw new InvalidOperationException("Adapter can only accept DirectorySecurityAdaper (provided " + fileSecurity.GetType().Name + ").");
+
+            return adapter.Security;
         }
 
         public static IDirectory GetDirectory([NotNull] string path, GetOption option = GetOption.Always) {

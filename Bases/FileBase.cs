@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.AccessControl;
 using System.Text;
+using AshMind.IO.Abstractions.Security;
 
 namespace AshMind.IO.Abstractions.Bases {
     public abstract class FileBase : FileSystemInfoBase, IFile {
-        public virtual FileSecurity GetAccessControl() {
+        public virtual IFileSecurity GetAccessControl() {
             throw new NotImplementedException();
         }
 
-        public virtual FileSecurity GetAccessControl(AccessControlSections includeSections) {
+        public virtual IFileSecurity GetAccessControl(AccessControlSections includeSections) {
             throw new NotImplementedException();
         }
 
-        public virtual void SetAccessControl(FileSecurity fileSecurity) {
+        public virtual void SetAccessControl(IFileSecurity fileSecurity) {
             throw new NotImplementedException();
         }
 

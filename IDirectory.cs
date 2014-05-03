@@ -2,18 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.AccessControl;
+using AshMind.IO.Abstractions.Security;
 using JetBrains.Annotations;
 
 namespace AshMind.IO.Abstractions {
     [PublicAPI]
     public interface IDirectory : IFileSystemInfo {
         [NotNull] IDirectory CreateSubdirectory([NotNull] string path);
-        [NotNull] IDirectory CreateSubdirectory([NotNull] string path, [NotNull] DirectorySecurity directorySecurity);
+        [NotNull] IDirectory CreateSubdirectory([NotNull] string path, [NotNull] IDirectorySecurity directorySecurity);
         void Create();
-        void Create([NotNull] DirectorySecurity directorySecurity);
-        [NotNull] DirectorySecurity GetAccessControl();
-        [NotNull] DirectorySecurity GetAccessControl(AccessControlSections includeSections);
-        void SetAccessControl([NotNull] DirectorySecurity directorySecurity);
+        void Create([NotNull] IDirectorySecurity directorySecurity);
+        [NotNull] IDirectorySecurity GetAccessControl();
+        [NotNull] IDirectorySecurity GetAccessControl(AccessControlSections includeSections);
+        void SetAccessControl([NotNull] IDirectorySecurity directorySecurity);
         [NotNull] IFile[] GetFiles([NotNull] string searchPattern);
         [NotNull] IFile[] GetFiles([NotNull] string searchPattern, SearchOption searchOption);
         [NotNull] IFile[] GetFiles();

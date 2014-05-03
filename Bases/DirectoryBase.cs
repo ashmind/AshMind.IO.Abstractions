@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.AccessControl;
+using AshMind.IO.Abstractions.Security;
 
 namespace AshMind.IO.Abstractions.Bases {
     public abstract class DirectoryBase : FileSystemInfoBase, IDirectory {
@@ -9,7 +10,7 @@ namespace AshMind.IO.Abstractions.Bases {
             throw new NotImplementedException();
         }
 
-        public virtual IDirectory CreateSubdirectory(string path, DirectorySecurity directorySecurity) {
+        public virtual IDirectory CreateSubdirectory(string path, IDirectorySecurity directorySecurity) {
             throw new NotImplementedException();
         }
 
@@ -17,19 +18,19 @@ namespace AshMind.IO.Abstractions.Bases {
             throw new NotImplementedException();
         }
 
-        public virtual void Create(DirectorySecurity directorySecurity) {
+        public virtual void Create(IDirectorySecurity directorySecurity) {
             throw new NotImplementedException();
         }
 
-        public virtual DirectorySecurity GetAccessControl() {
+        public virtual IDirectorySecurity GetAccessControl() {
             throw new NotImplementedException();
         }
 
-        public virtual DirectorySecurity GetAccessControl(AccessControlSections includeSections) {
+        public virtual IDirectorySecurity GetAccessControl(AccessControlSections includeSections) {
             throw new NotImplementedException();
         }
 
-        public virtual void SetAccessControl(DirectorySecurity directorySecurity) {
+        public virtual void SetAccessControl(IDirectorySecurity directorySecurity) {
             throw new NotImplementedException();
         }
 

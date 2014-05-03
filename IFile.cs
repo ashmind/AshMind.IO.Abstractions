@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.AccessControl;
 using System.Text;
+using AshMind.IO.Abstractions.Security;
 using JetBrains.Annotations;
 
 namespace AshMind.IO.Abstractions {
     [PublicAPI]
     public interface IFile : IFileSystemInfo {
         // basic FileInfo methods
-        [NotNull] FileSecurity GetAccessControl();
-        [NotNull] FileSecurity GetAccessControl(AccessControlSections includeSections);
-        void SetAccessControl([NotNull] FileSecurity fileSecurity);
+        [NotNull] IFileSecurity GetAccessControl();
+        [NotNull] IFileSecurity GetAccessControl(AccessControlSections includeSections);
+        void SetAccessControl([NotNull] IFileSecurity fileSecurity);
         [NotNull] StreamReader OpenText();
         [NotNull] StreamWriter CreateText();
         [NotNull] StreamWriter AppendText();

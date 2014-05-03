@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
+using AshMind.IO.Abstractions.Security;
 using JetBrains.Annotations;
 
 namespace AshMind.IO.Abstractions.Adapters {
@@ -20,16 +21,16 @@ namespace AshMind.IO.Abstractions.Adapters {
             _fileInfo = fileInfo;
         }
         
-        public virtual FileSecurity GetAccessControl() {
-            return _fileInfo.GetAccessControl();
+        public virtual IFileSecurity GetAccessControl() {
+            return AdapterHelper.Adapt(_fileInfo.GetAccessControl());
         }
 
-        public virtual FileSecurity GetAccessControl(AccessControlSections includeSections) {
-            return _fileInfo.GetAccessControl(includeSections);
+        public virtual IFileSecurity GetAccessControl(AccessControlSections includeSections) {
+            return AdapterHelper.Adapt(_fileInfo.GetAccessControl(includeSections));
         }
 
-        public virtual void SetAccessControl(FileSecurity fileSecurity) {
-            _fileInfo.SetAccessControl(fileSecurity);
+        public virtual void SetAccessControl(IFileSecurity fileSecurity) {
+            _fileInfo.SetAccessControl(AdapterHelper.Unwrap(fileSecurity));
         }
 
         public virtual StreamReader OpenText() {

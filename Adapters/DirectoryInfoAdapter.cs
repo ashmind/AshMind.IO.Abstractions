@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
+using AshMind.IO.Abstractions.Security;
 using JetBrains.Annotations;
 
 namespace AshMind.IO.Abstractions.Adapters {
@@ -17,28 +18,28 @@ namespace AshMind.IO.Abstractions.Adapters {
             return new DirectoryInfoAdapter(_directoryInfo.CreateSubdirectory(path));
         }
 
-        public virtual IDirectory CreateSubdirectory(string path, DirectorySecurity directorySecurity) {
-            return new DirectoryInfoAdapter(_directoryInfo.CreateSubdirectory(path, directorySecurity));
+        public virtual IDirectory CreateSubdirectory(string path, IDirectorySecurity directorySecurity) {
+            return new DirectoryInfoAdapter(_directoryInfo.CreateSubdirectory(path, AdapterHelper.Unwrap(directorySecurity)));
         }
 
         public virtual void Create() {
             _directoryInfo.Create();
         }
 
-        public virtual void Create(DirectorySecurity directorySecurity) {
-            _directoryInfo.Create(directorySecurity);
+        public virtual void Create(IDirectorySecurity directorySecurity) {
+            _directoryInfo.Create(AdapterHelper.Unwrap(directorySecurity));
         }
 
-        public virtual DirectorySecurity GetAccessControl() {
-            return _directoryInfo.GetAccessControl();
+        public virtual IDirectorySecurity GetAccessControl() {
+            return AdapterHelper.Adapt(_directoryInfo.GetAccessControl());
         }
 
-        public virtual DirectorySecurity GetAccessControl(AccessControlSections includeSections) {
-            return _directoryInfo.GetAccessControl(includeSections);
+        public virtual IDirectorySecurity GetAccessControl(AccessControlSections includeSections) {
+            return AdapterHelper.Adapt(_directoryInfo.GetAccessControl(includeSections));
         }
 
-        public virtual void SetAccessControl(DirectorySecurity directorySecurity) {
-            _directoryInfo.SetAccessControl(directorySecurity);
+        public virtual void SetAccessControl(IDirectorySecurity directorySecurity) {
+            _directoryInfo.SetAccessControl(AdapterHelper.Unwrap(directorySecurity));
         }
 
         public virtual IFile[] GetFiles(string searchPattern) {
