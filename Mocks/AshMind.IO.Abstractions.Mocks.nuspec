@@ -14,5 +14,8 @@
     <releaseNotes></releaseNotes>
     <copyright>Copyright (c) 2014 Andrey Shchekin</copyright>
     <tags>io testability mocks</tags>
+    <dependencies>
+      <dependency id="AshMind.IO.Abstractions" version="0.7.2" />
+    </dependencies>
   </metadata>
 </package>
