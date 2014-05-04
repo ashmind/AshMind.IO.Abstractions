@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>AshMind.IO.Abstractions.Mocks</id>
+    <version>0.7.2-pre</version> <!-- Note: Please keep in sync with AssemblyInfo.cs version -->
+    <authors>Andrey Shchekin</authors>
+    <owners>Andrey Shchekin</owners>
+    <projectUrl>https://github.com/ashmind/AshMind.IO.Abstractions</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>Mocks for AshMind.IO.Abstractions.</summary>
+    <description>
+      Similar to System.IO.Abstractions.TestHelpers package, but with .NET 4.5 methods and slightly different API.
+    </description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright (c) 2014 Andrey Shchekin</copyright>
+    <tags>io testability mocks</tags>
+  </metadata>
+</package>

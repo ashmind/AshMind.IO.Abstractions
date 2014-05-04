@@ -41,7 +41,7 @@ namespace AshMind.IO.Abstractions {
         [NotNull] string[] ReadAllLines([NotNull] Encoding encoding);
         [NotNull] byte[] ReadAllBytes();
 
-        void WriteAllText([CanBeNull] string content);
+        void WriteAllText([CanBeNull] string contents);
         void WriteAllText([CanBeNull] string contents, [NotNull] Encoding encoding);
         void WriteAllLines([NotNull] string[] contents);
         void WriteAllLines([NotNull] string[] contents, [NotNull] Encoding encoding);

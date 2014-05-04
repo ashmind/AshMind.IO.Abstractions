@@ -1,23 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{48B9BF9A-498F-4238-9F1E-CE9FAB616B09}"
-	ProjectSection(SolutionItems) = preProject
-		License.txt = License.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net40", "Net40.csproj", "{064B8029-B761-43FC-8844-0488E8EF9EEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net35", "Net35.csproj", "{B21FC6C7-3FF3-4AEB-AE94-F0501E54201E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{E40A2F3C-917C-47F5-A3F7-C89DF7C5939A}"
-	ProjectSection(SolutionItems) = preProject
-		Properties\AssemblyInfo.cs = Properties\AssemblyInfo.cs
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet", "NuGet.csproj", "{B4234A52-83A2-4FCE-91BD-25F7D9485AC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{75155A5B-0333-4078-942A-ABEBE1F8EA25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mocks", "Mocks", "{892054EE-DA1B-4BDE-A38E-F1A3233A36C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet", "Mocks\NuGet.csproj", "{FA7F9296-BC86-456C-99BF-257AE8D74CCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net35", "Mocks\Net35.csproj", "{4605DC36-69FC-44DD-85BF-7648C476B004}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,11 +65,32 @@ Global
 		{75155A5B-0333-4078-942A-ABEBE1F8EA25}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{75155A5B-0333-4078-942A-ABEBE1F8EA25}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{75155A5B-0333-4078-942A-ABEBE1F8EA25}.Release|x86.ActiveCfg = Release|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB}.Release|x86.ActiveCfg = Release|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4605DC36-69FC-44DD-85BF-7648C476B004}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E40A2F3C-917C-47F5-A3F7-C89DF7C5939A} = {48B9BF9A-498F-4238-9F1E-CE9FAB616B09}
+		{FA7F9296-BC86-456C-99BF-257AE8D74CCB} = {892054EE-DA1B-4BDE-A38E-F1A3233A36C4}
+		{4605DC36-69FC-44DD-85BF-7648C476B004} = {892054EE-DA1B-4BDE-A38E-F1A3233A36C4}
 	EndGlobalSection
 EndGlobal

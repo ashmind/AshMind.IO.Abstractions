@@ -15,24 +15,26 @@ namespace AshMind.IO.Abstractions {
         [NotNull] IDirectorySecurity GetAccessControl();
         [NotNull] IDirectorySecurity GetAccessControl(AccessControlSections includeSections);
         void SetAccessControl([NotNull] IDirectorySecurity directorySecurity);
+
+        [NotNull] IFile[] GetFiles();
         [NotNull] IFile[] GetFiles([NotNull] string searchPattern);
         [NotNull] IFile[] GetFiles([NotNull] string searchPattern, SearchOption searchOption);
-        [NotNull] IFile[] GetFiles();
+
         [NotNull] IDirectory[] GetDirectories();
+        [NotNull] IDirectory[] GetDirectories([NotNull] string searchPattern);
+        [NotNull] IDirectory[] GetDirectories([NotNull] string searchPattern, SearchOption searchOption);
+        
+        [NotNull] IFileSystemInfo[] GetFileSystemInfos();
         [NotNull] IFileSystemInfo[] GetFileSystemInfos([NotNull] string searchPattern);
         #if NET40
         [NotNull] IFileSystemInfo[] GetFileSystemInfos([NotNull] string searchPattern, SearchOption searchOption);
-        #endif
-        [NotNull] IFileSystemInfo[] GetFileSystemInfos();
-        [NotNull] IDirectory[] GetDirectories([NotNull] string searchPattern);
-        [NotNull] IDirectory[] GetDirectories([NotNull] string searchPattern, SearchOption searchOption);
-        #if NET40
-        [NotNull] IEnumerable<IDirectory> EnumerateDirectories();
-        [NotNull] IEnumerable<IDirectory> EnumerateDirectories([NotNull] string searchPattern);
-        [NotNull] IEnumerable<IDirectory> EnumerateDirectories([NotNull] string searchPattern, SearchOption searchOption);
+
         [NotNull] IEnumerable<IFile> EnumerateFiles();
         [NotNull] IEnumerable<IFile> EnumerateFiles([NotNull] string searchPattern);
         [NotNull] IEnumerable<IFile> EnumerateFiles([NotNull] string searchPattern, SearchOption searchOption);
+        [NotNull] IEnumerable<IDirectory> EnumerateDirectories();
+        [NotNull] IEnumerable<IDirectory> EnumerateDirectories([NotNull] string searchPattern);
+        [NotNull] IEnumerable<IDirectory> EnumerateDirectories([NotNull] string searchPattern, SearchOption searchOption);
         [NotNull] IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos();
         [NotNull] IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos([NotNull] string searchPattern);
         [NotNull] IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos([NotNull] string searchPattern, SearchOption searchOption);

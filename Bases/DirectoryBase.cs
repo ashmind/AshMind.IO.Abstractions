@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.AccessControl;
 using AshMind.IO.Abstractions.Security;
 
@@ -34,84 +35,84 @@ namespace AshMind.IO.Abstractions.Bases {
             throw new NotImplementedException();
         }
 
+        public virtual IFile[] GetFiles() {
+            return GetFiles("*", SearchOption.TopDirectoryOnly);
+        }
+
         public virtual IFile[] GetFiles(string searchPattern) {
-            throw new NotImplementedException();
+            return GetFiles(searchPattern, SearchOption.TopDirectoryOnly);
         }
 
         public virtual IFile[] GetFiles(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
-        }
-
-        public virtual IFile[] GetFiles() {
-            throw new NotImplementedException();
+            return EnumerateFiles(searchPattern, searchOption).ToArray();
         }
 
         public virtual IDirectory[] GetDirectories() {
-            throw new NotImplementedException();
-        }
-
-        public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern) {
-            throw new NotImplementedException();
-        }
-
-        #if NET40
-        public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
-        }
-        #endif
-
-        public virtual IFileSystemInfo[] GetFileSystemInfos() {
-            throw new NotImplementedException();
+            return GetDirectories("*", SearchOption.TopDirectoryOnly);
         }
 
         public virtual IDirectory[] GetDirectories(string searchPattern) {
-            throw new NotImplementedException();
+            return GetDirectories(searchPattern, SearchOption.TopDirectoryOnly);
         }
 
         public virtual IDirectory[] GetDirectories(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
+            return EnumerateDirectories(searchPattern, searchOption).ToArray();
+        }
+        
+        public virtual IFileSystemInfo[] GetFileSystemInfos() {
+            return GetFileSystemInfos("*");
         }
 
-        #if NET40
+        public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern) {
+            return GetFileSystemInfos("*", SearchOption.TopDirectoryOnly);
+        }
+
+        public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern, SearchOption searchOption) {
+            return EnumerateDirectories(searchPattern, searchOption).ToArray();
+        }
+
         public virtual IEnumerable<IDirectory> EnumerateDirectories() {
-            throw new NotImplementedException();
+            return EnumerateDirectories("*", SearchOption.TopDirectoryOnly);
         }
 
         public virtual IEnumerable<IDirectory> EnumerateDirectories(string searchPattern) {
-            throw new NotImplementedException();
+            return EnumerateDirectories(searchPattern, SearchOption.TopDirectoryOnly);
         }
 
         public virtual IEnumerable<IDirectory> EnumerateDirectories(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
+            return EnumerateFileSystemInfos(searchPattern, searchOption).OfType<IDirectory>();
         }
 
         public virtual IEnumerable<IFile> EnumerateFiles() {
-            throw new NotImplementedException();
+            return EnumerateFiles("*", SearchOption.TopDirectoryOnly);
         }
 
         public virtual IEnumerable<IFile> EnumerateFiles(string searchPattern) {
-            throw new NotImplementedException();
+            return EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly);
         }
 
         public virtual IEnumerable<IFile> EnumerateFiles(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
+            return EnumerateFileSystemInfos(searchPattern, searchOption).OfType<IFile>();
         }
 
         public virtual IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos() {
-            throw new NotImplementedException();
+            return EnumerateFileSystemInfos("*", SearchOption.TopDirectoryOnly);
         }
 
         public virtual IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos(string searchPattern) {
-            throw new NotImplementedException();
+            return EnumerateFileSystemInfos(searchPattern, SearchOption.TopDirectoryOnly);;
         }
 
         public virtual IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos(string searchPattern, SearchOption searchOption) {
             throw new NotImplementedException();
         }
-        #endif
 
         public virtual void MoveTo(string destDirName) {
             throw new NotImplementedException();
+        }
+
+        public override void Delete() {
+            Delete(false);
         }
 
         public virtual void Delete(bool recursive) {
@@ -126,11 +127,11 @@ namespace AshMind.IO.Abstractions.Bases {
             get { throw new NotImplementedException(); }
         }
         
-        public IDirectory GetDirectory(string name, GetOption option = GetOption.Always) {
+        public virtual IDirectory GetDirectory(string name, GetOption option = GetOption.Always) {
             throw new NotImplementedException();
         }
 
-        public IFile GetFile(string name, GetOption option = GetOption.Always) {
+        public virtual IFile GetFile(string name, GetOption option = GetOption.Always) {
             throw new NotImplementedException();
         }
     }

@@ -42,6 +42,10 @@ namespace AshMind.IO.Abstractions.Adapters {
             _directoryInfo.SetAccessControl(AdapterHelper.Unwrap(directorySecurity));
         }
 
+        public virtual IFile[] GetFiles() {
+            return Array.ConvertAll(_directoryInfo.GetFiles(), AdapterHelper.Adapt);
+        }
+
         public virtual IFile[] GetFiles(string searchPattern) {
             return Array.ConvertAll(_directoryInfo.GetFiles(searchPattern), AdapterHelper.Adapt);
         }
@@ -50,26 +54,8 @@ namespace AshMind.IO.Abstractions.Adapters {
             return Array.ConvertAll(_directoryInfo.GetFiles(searchPattern, searchOption), AdapterHelper.Adapt);
         }
 
-        public virtual IFile[] GetFiles() {
-            return Array.ConvertAll(_directoryInfo.GetFiles(), AdapterHelper.Adapt);
-        }
-
         public virtual IDirectory[] GetDirectories() {
             return Array.ConvertAll(_directoryInfo.GetDirectories(), AdapterHelper.Adapt);
-        }
-
-        public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern) {
-            return Array.ConvertAll(_directoryInfo.GetFileSystemInfos(searchPattern), AdapterHelper.Adapt);
-        }
-
-        #if NET40
-        public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern, SearchOption searchOption) {
-            return Array.ConvertAll(_directoryInfo.GetFileSystemInfos(searchPattern, searchOption), AdapterHelper.Adapt);
-        }
-        #endif
-
-        public virtual IFileSystemInfo[] GetFileSystemInfos() {
-            return Array.ConvertAll(_directoryInfo.GetFileSystemInfos(), AdapterHelper.Adapt);
         }
 
         public virtual IDirectory[] GetDirectories(string searchPattern) {
@@ -80,17 +66,17 @@ namespace AshMind.IO.Abstractions.Adapters {
             return Array.ConvertAll(_directoryInfo.GetDirectories(searchPattern, searchOption), AdapterHelper.Adapt);
         }
 
+        public virtual IFileSystemInfo[] GetFileSystemInfos() {
+            return Array.ConvertAll(_directoryInfo.GetFileSystemInfos(), AdapterHelper.Adapt);
+        }
+
+        public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern) {
+            return Array.ConvertAll(_directoryInfo.GetFileSystemInfos(searchPattern), AdapterHelper.Adapt);
+        }
+
         #if NET40
-        public virtual IEnumerable<IDirectory> EnumerateDirectories() {
-            return _directoryInfo.EnumerateDirectories().Select(AdapterHelper.Adapt);
-        }
-
-        public virtual IEnumerable<IDirectory> EnumerateDirectories(string searchPattern) {
-            return _directoryInfo.EnumerateDirectories(searchPattern).Select(AdapterHelper.Adapt);
-        }
-
-        public virtual IEnumerable<IDirectory> EnumerateDirectories(string searchPattern, SearchOption searchOption) {
-            return _directoryInfo.EnumerateDirectories(searchPattern, searchOption).Select(AdapterHelper.Adapt);
+        public virtual IFileSystemInfo[] GetFileSystemInfos(string searchPattern, SearchOption searchOption) {
+            return Array.ConvertAll(_directoryInfo.GetFileSystemInfos(searchPattern, searchOption), AdapterHelper.Adapt);
         }
 
         public virtual IEnumerable<IFile> EnumerateFiles() {
@@ -105,6 +91,17 @@ namespace AshMind.IO.Abstractions.Adapters {
             return _directoryInfo.EnumerateFiles(searchPattern, searchOption).Select(AdapterHelper.Adapt);
         }
 
+        public virtual IEnumerable<IDirectory> EnumerateDirectories() {
+            return _directoryInfo.EnumerateDirectories().Select(AdapterHelper.Adapt);
+        }
+
+        public virtual IEnumerable<IDirectory> EnumerateDirectories(string searchPattern) {
+            return _directoryInfo.EnumerateDirectories(searchPattern).Select(AdapterHelper.Adapt);
+        }
+
+        public virtual IEnumerable<IDirectory> EnumerateDirectories(string searchPattern, SearchOption searchOption) {
+            return _directoryInfo.EnumerateDirectories(searchPattern, searchOption).Select(AdapterHelper.Adapt);
+        }
         public virtual IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos() {
             return _directoryInfo.EnumerateFileSystemInfos().Select(AdapterHelper.Adapt);
         }

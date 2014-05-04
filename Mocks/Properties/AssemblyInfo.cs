@@ -3,11 +3,9 @@
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-using System.Runtime.CompilerServices;
-
-[assembly: AssemblyTitle("AshMind.IO.Abstractions")]
+[assembly: AssemblyTitle("AshMind.IO.Abstractions.Mocks")]
 [assembly: AssemblyCompany("Andrey Shchekin")]
-[assembly: AssemblyProduct("AshMind.IO.Abstractions")]
+[assembly: AssemblyProduct("AshMind.IO.Abstractions.Mocks")]
 [assembly: AssemblyCopyright("Copyright © Andrey Shchekin 2013–2014")]
 
 // Version information for an assembly consists of the following four values:
@@ -22,5 +20,4 @@ using System.Runtime.CompilerServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.7.2.0")]
 [assembly: AssemblyFileVersion("0.7.2.0")]
-
-[assembly: InternalsVisibleTo("AshMind.IO.Abstractions.Mocks")]
+[assembly: AssemblyInformationalVersion("0.7.2-pre")]
