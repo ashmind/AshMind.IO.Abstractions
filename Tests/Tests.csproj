@@ -7,8 +7,8 @@
     <ProjectGuid>{75155A5B-0333-4078-942A-ABEBE1F8EA25}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>None</RootNamespace>
-    <AssemblyName>Argument.Tests</AssemblyName>
+    <RootNamespace>AshMind.IO.Abstractions.Tests</RootNamespace>
+    <AssemblyName>AshMind.IO.Abstractions.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -50,9 +50,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Internal\ReflectionDataAttribute.cs" />
+    <Compile Include="Of.Mocks\FileMockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mocks\Net35.csproj">
+      <Project>{4605dc36-69fc-44dd-85bf-7648c476b004}</Project>
+      <Name>Net35 %28Mocks\Net35%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Net40.csproj">
       <Project>{064b8029-b761-43fc-8844-0488e8ef9eec}</Project>
       <Name>Net40</Name>

@@ -39,6 +39,9 @@ namespace AshMind.IO.Abstractions.Mocks {
         }
         
         public override Stream Open(FileMode mode, FileAccess access, FileShare share) {
+            if (!Exists)
+                throw new FileNotFoundException();
+
             _data.Seek(0, SeekOrigin.Begin);
             return _data;
         }
