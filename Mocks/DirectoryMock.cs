@@ -18,6 +18,7 @@ namespace AshMind.IO.Abstractions.Mocks {
             Name = name;
             FullName = name;
             Extension = "";
+            Exists = true;
             foreach (var item in items) {
                 // ReSharper disable once AssignNullToNotNullAttribute
                 AddInternal(item);
@@ -67,7 +68,7 @@ namespace AshMind.IO.Abstractions.Mocks {
         public override IEnumerable<IFileSystemInfo> EnumerateFileSystemInfos(string searchPattern, SearchOption searchOption) {
             var patternRegex = new Regex(searchPattern.Replace("*", ".*").Replace("?", ".?"));
             // ReSharper disable once PossibleNullReferenceException
-            return _items.Where(i => patternRegex.IsMatch(i.Name));
+            return _items.Where(i => i.Exists && patternRegex.IsMatch(i.Name));
         }
         
         public override void Delete(bool recursive) {
@@ -84,14 +85,14 @@ namespace AshMind.IO.Abstractions.Mocks {
         public new IDirectory Root { get; set; }
 
         public override IDirectory GetDirectory(string name, GetOption option = GetOption.Always) {
-            return GetItem<IDirectory>(name, option);
+            return GetItem<IDirectory>(name, option, () => new DirectoryMock(name) { Exists = false });
         }
 
         public override IFile GetFile(string name, GetOption option = GetOption.Always) {
-            return GetItem<IFile>(name, option);
+            return GetItem<IFile>(name, option, () => new FileMock(name, "") { Exists = false });
         }
 
-        private T GetItem<T>(string name, GetOption option) 
+        private T GetItem<T>(string name, GetOption option, [NotNull] Func<T> defaultFactory) 
             where T: class, IFileSystemInfo
         {
             // ReSharper disable once PossibleNullReferenceException
@@ -99,7 +100,7 @@ namespace AshMind.IO.Abstractions.Mocks {
             if (existing == null && option != GetOption.Always)
                 return null;
 
-            return existing;
+            return existing ?? defaultFactory();
         }
 
         public override void Refresh() {

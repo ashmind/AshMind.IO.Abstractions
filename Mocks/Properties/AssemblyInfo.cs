@@ -20,4 +20,4 @@
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.7.2.0")]
 [assembly: AssemblyFileVersion("0.7.2.0")]
-[assembly: AssemblyInformationalVersion("0.7.2-pre")]
+[assembly: AssemblyInformationalVersion("0.7.2-pre2")]

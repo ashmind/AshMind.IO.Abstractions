@@ -23,8 +23,9 @@ namespace AshMind.IO.Abstractions.Mocks {
         }
 
         private FileMock([NotNull] string name) {
-            this.Name = name;
-            this.Extension = Path.GetExtension(this.Name);
+            Name = name;
+            Extension = Path.GetExtension(this.Name);
+            Exists = true;
         }
 
         public virtual void SetContents([CanBeNull] string contents, [CanBeNull] Encoding encoding = null) {

@@ -7,7 +7,7 @@
     <ProjectGuid>{B21FC6C7-3FF3-4AEB-AE94-F0501E54201E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>None</RootNamespace>
+    <RootNamespace>AshMind.IO.Abstractions</RootNamespace>
     <AssemblyName>AshMind.IO.Abstractions</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
