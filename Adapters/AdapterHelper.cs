@@ -79,20 +79,32 @@ namespace AshMind.IO.Abstractions.Adapters {
             return adapter.Security;
         }
 
-        public static IDirectory GetDirectory([NotNull] string path, GetOption option = GetOption.Always) {
+        public static IDirectory GetDirectory([NotNull] string path, GetOption option = GetOption.Existing) {
             var directory = new DirectoryInfo(path);
-            if (option == GetOption.OnlyIfExists && !directory.Exists)
+            if (option == GetOption.Existing && !directory.Exists)
                 return null;
 
             return AdapterHelper.Adapt(directory);
         }
 
-        public static IFile GetFile([NotNull] string path, GetOption option = GetOption.Always) {
+        public static IFile GetFile([NotNull] string path, GetOption option = GetOption.Existing) {
             var file = new FileInfo(path);
-            if (option == GetOption.OnlyIfExists && !file.Exists)
+            if (option == GetOption.Existing && !file.Exists)
                 return null;
 
             return AdapterHelper.Adapt(file);
+        }
+
+        public static IFileSystemInfo GetFileSystemInfo([NotNull] string path) {
+            var file = new FileInfo(path);
+            if (file.Exists)
+                return AdapterHelper.Adapt(file);
+
+            var directory = new DirectoryInfo(path);
+            if (directory.Exists)
+                return AdapterHelper.Adapt(directory);
+
+            return null;
         }
     }
 }

@@ -84,22 +84,27 @@ namespace AshMind.IO.Abstractions.Mocks {
         public new IDirectory Parent { get; set; }
         public new IDirectory Root { get; set; }
 
-        public override IDirectory GetDirectory(string name, GetOption option = GetOption.Always) {
+        public override IDirectory GetDirectory(string name, GetOption option = GetOption.Existing) {
             return GetItem<IDirectory>(name, option, () => new DirectoryMock(name) { Exists = false });
         }
 
-        public override IFile GetFile(string name, GetOption option = GetOption.Always) {
+        public override IFile GetFile(string name, GetOption option = GetOption.Existing) {
             return GetItem<IFile>(name, option, () => new FileMock(name, "") { Exists = false });
         }
 
-        private T GetItem<T>(string name, GetOption option, [NotNull] Func<T> defaultFactory) 
+        public override IFileSystemInfo GetFileSystemInfo(string name) {
+            return GetItem<IFileSystemInfo>(name, GetOption.Existing, null);
+        }
+
+        private T GetItem<T>(string name, GetOption option, [CanBeNull] Func<T> defaultFactory) 
             where T: class, IFileSystemInfo
         {
             // ReSharper disable once PossibleNullReferenceException
             var existing = _items.OfType<T>().SingleOrDefault(i => i.Name == name);
-            if (existing == null && option != GetOption.Always)
+            if (existing == null && option == GetOption.Existing)
                 return null;
 
+            // ReSharper disable once PossibleNullReferenceException
             return existing ?? defaultFactory();
         }
 

@@ -127,11 +127,15 @@ namespace AshMind.IO.Abstractions.Bases {
             get { throw new NotImplementedException(); }
         }
         
-        public virtual IDirectory GetDirectory(string name, GetOption option = GetOption.Always) {
+        public virtual IDirectory GetDirectory(string name, GetOption option = GetOption.Existing) {
             throw new NotImplementedException();
         }
 
-        public virtual IFile GetFile(string name, GetOption option = GetOption.Always) {
+        public virtual IFile GetFile(string name, GetOption option = GetOption.Existing) {
+            throw new NotImplementedException();
+        }
+
+        public virtual IFileSystemInfo GetFileSystemInfo(string name) {
             throw new NotImplementedException();
         }
     }
