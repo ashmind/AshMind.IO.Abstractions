@@ -96,7 +96,7 @@ namespace AshMind.IO.Abstractions.Mocks {
         }
 
         public override IFileSystemInfo GetFileSystemInfo(string name, GetOption option = GetOption.Existing) {
-            return GetItem<IFileSystemInfo>(name, GetOption.Existing, () => new FileSystemInfoMock(name) { Exists = false });
+            return GetItem<IFileSystemInfo>(name, option, () => new FileSystemInfoMock(name) { Exists = false });
         }
 
         private T GetItem<T>(string name, GetOption option, [CanBeNull] Func<T> defaultFactory) 
