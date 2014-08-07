@@ -12,8 +12,8 @@ namespace AshMind.IO.Abstractions.Adapters {
             return AdapterHelper.GetFile(path, option);
         }
 
-        public IFileSystemInfo GetFileSystemInfo(string path) {
-            return AdapterHelper.GetFileSystemInfo(path);
+        public IFileSystemInfo GetFileSystemInfo(string path, GetOption option = GetOption.Existing) {
+            return AdapterHelper.GetFileSystemInfo(path, option);
         }
     }
 }

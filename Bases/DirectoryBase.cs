@@ -135,7 +135,7 @@ namespace AshMind.IO.Abstractions.Bases {
             throw new NotImplementedException();
         }
 
-        public virtual IFileSystemInfo GetFileSystemInfo(string name) {
+        public virtual IFileSystemInfo GetFileSystemInfo(string name, GetOption option = GetOption.Existing) {
             throw new NotImplementedException();
         }
     }

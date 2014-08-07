@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="FileMock.cs" />
     <Compile Include="DirectoryMock.cs" />
+    <Compile Include="FileSystemInfoMock.cs" />
     <Compile Include="FileSystemMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

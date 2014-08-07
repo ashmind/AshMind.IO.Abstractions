@@ -11,8 +11,8 @@ namespace AshMind.IO.Abstractions.Bases {
         public virtual IFile GetFile(string path, GetOption option = GetOption.Existing) {
             throw new NotImplementedException();
         }
-        
-        public virtual IFileSystemInfo GetFileSystemInfo(string path) {
+
+        public virtual IFileSystemInfo GetFileSystemInfo(string path, GetOption option = GetOption.Existing) {
             throw new NotImplementedException();
         }
     }

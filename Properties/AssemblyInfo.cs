@@ -1,9 +1,10 @@
-﻿using System.Reflection;
-
-// General Information about an assembly is controlled through the following 
+﻿// General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
+using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using AshMind.IO.Abstractions.Properties;
 
 [assembly: AssemblyTitle("AshMind.IO.Abstractions")]
 [assembly: AssemblyCompany("Andrey Shchekin")]
@@ -20,7 +21,15 @@ using System.Runtime.CompilerServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.8.0.0")]
-[assembly: AssemblyFileVersion("0.8.0.0")]
+[assembly: AssemblyVersion(AssemblyInfo.VersionString)]
+[assembly: AssemblyFileVersion(AssemblyInfo.VersionString)]
+[assembly: AssemblyInformationalVersion(AssemblyInfo.VersionStringFull)]
 
 [assembly: InternalsVisibleTo("AshMind.IO.Abstractions.Mocks")]
+
+namespace AshMind.IO.Abstractions.Properties {
+    internal static class AssemblyInfo {
+        public const string VersionString = "0.8.1.0";
+        public const string VersionStringFull = VersionString + "-pre";
+    }
+}

@@ -95,7 +95,7 @@ namespace AshMind.IO.Abstractions.Adapters {
             return AdapterHelper.Adapt(file);
         }
 
-        public static IFileSystemInfo GetFileSystemInfo([NotNull] string path) {
+        public static IFileSystemInfo GetFileSystemInfo([NotNull] string path, GetOption option = GetOption.Existing) {
             var file = new FileInfo(path);
             if (file.Exists)
                 return AdapterHelper.Adapt(file);
@@ -104,7 +104,10 @@ namespace AshMind.IO.Abstractions.Adapters {
             if (directory.Exists)
                 return AdapterHelper.Adapt(directory);
 
-            return null;
+            if (option == GetOption.Existing)
+                return null;
+
+            return new FileSystemInfoAdapter(file);
         }
     }
 }

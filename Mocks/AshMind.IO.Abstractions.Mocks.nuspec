@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>AshMind.IO.Abstractions.Mocks</id>
-    <version>0.8.0-pre3</version> <!-- Note: Please keep in sync with AssemblyInfo.cs version -->
+    <version>0.8.1-pre-m1</version> <!-- Note: Please keep in sync with AssemblyInfo.cs version -->
     <authors>Andrey Shchekin</authors>
     <owners>Andrey Shchekin</owners>
     <projectUrl>https://github.com/ashmind/AshMind.IO.Abstractions</projectUrl>
@@ -15,7 +15,7 @@
     <copyright>Copyright (c) 2014 Andrey Shchekin</copyright>
     <tags>io testability mocks</tags>
     <dependencies>
-      <dependency id="AshMind.IO.Abstractions" version="0.8.0" />
+      <dependency id="AshMind.IO.Abstractions" version="0.8.1-pre" />
     </dependencies>
   </metadata>
 </package>

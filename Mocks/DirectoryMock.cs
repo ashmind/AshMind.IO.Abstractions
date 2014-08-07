@@ -14,6 +14,9 @@ namespace AshMind.IO.Abstractions.Mocks {
         [NotNull] private readonly IList<IFileSystemInfo> _items = new List<IFileSystemInfo>();
         [CanBeNull] private string _fullName;
 
+        public DirectoryMock([NotNull] params IFileSystemInfo[] items) : this("", items) {
+        }
+
         public DirectoryMock([NotNull] string name, [NotNull] params IFileSystemInfo[] items) {
             Name = name;
             FullName = name;
@@ -92,8 +95,8 @@ namespace AshMind.IO.Abstractions.Mocks {
             return GetItem<IFile>(name, option, () => new FileMock(name, "") { Exists = false });
         }
 
-        public override IFileSystemInfo GetFileSystemInfo(string name) {
-            return GetItem<IFileSystemInfo>(name, GetOption.Existing, null);
+        public override IFileSystemInfo GetFileSystemInfo(string name, GetOption option = GetOption.Existing) {
+            return GetItem<IFileSystemInfo>(name, GetOption.Existing, () => new FileSystemInfoMock(name) { Exists = false });
         }
 
         private T GetItem<T>(string name, GetOption option, [CanBeNull] Func<T> defaultFactory) 

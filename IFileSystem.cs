@@ -8,6 +8,6 @@ namespace AshMind.IO.Abstractions {
     public interface IFileSystem {
         [PublicAPI, CanBeNull] IDirectory GetDirectory([NotNull] string path, GetOption option = GetOption.Existing);
         [PublicAPI, CanBeNull] IFile GetFile([NotNull] string path, GetOption option = GetOption.Existing);
-        [PublicAPI, CanBeNull] IFileSystemInfo GetFileSystemInfo([NotNull] string path);
+        [PublicAPI, CanBeNull] IFileSystemInfo GetFileSystemInfo([NotNull] string path, GetOption option = GetOption.Existing);
     }
 }

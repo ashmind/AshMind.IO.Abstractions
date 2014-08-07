@@ -139,8 +139,8 @@ namespace AshMind.IO.Abstractions.Adapters {
             return AdapterHelper.GetFile(Path.Combine(_directoryInfo.FullName, name), option);
         }
 
-        public virtual IFileSystemInfo GetFileSystemInfo(string name) {
-            return AdapterHelper.GetFileSystemInfo(Path.Combine(_directoryInfo.FullName, name));
+        public virtual IFileSystemInfo GetFileSystemInfo(string name, GetOption option = GetOption.Existing) {
+            return AdapterHelper.GetFileSystemInfo(Path.Combine(_directoryInfo.FullName, name), option);
         }
     }
 }

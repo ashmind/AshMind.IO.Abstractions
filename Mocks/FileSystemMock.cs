@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AshMind.IO.Abstractions.Adapters;
 using AshMind.IO.Abstractions.Bases;
 using JetBrains.Annotations;
 
@@ -27,8 +28,12 @@ namespace AshMind.IO.Abstractions.Mocks {
             return new FileMock(Path.GetFileName(path), "") { FullName = path, Exists = false };
         }
 
-        public override IFileSystemInfo GetFileSystemInfo(string path) {
-            return _items.SingleOrDefault(i => i.FullName == path);
+        public override IFileSystemInfo GetFileSystemInfo(string path, GetOption option = GetOption.Existing) {
+            var item = _items.SingleOrDefault(i => i.FullName == path);
+            if (item != null || option == GetOption.Existing)
+                return item;
+
+            return new FileSystemInfoMock(Path.GetFileName(path)) { FullName = path, Exists = false };
         }
 
         #region IEnumerable<IFileSystemInfo> Members
