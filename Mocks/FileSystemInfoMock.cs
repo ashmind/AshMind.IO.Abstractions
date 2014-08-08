@@ -5,14 +5,13 @@ using JetBrains.Annotations;
 namespace AshMind.IO.Abstractions.Mocks {
     public class FileSystemInfoMock : IFileSystemInfo {
         [CanBeNull] private string _fullName;
-        [NotNull] private FileSystemMock _fileSystem;
+        [CanBeNull] private FileSystemMock _fileSystem;
 
         public FileSystemInfoMock([NotNull] string name = "") {
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
             Name = name;
             Extension = Path.GetExtension(this.Name);
             Exists = true;
-            FileSystem = new FileSystemMock();
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
         
@@ -63,10 +62,9 @@ namespace AshMind.IO.Abstractions.Mocks {
         }
 
         /// <summary>
-        /// Represents the mock FileSystem the item is in.
         /// This is required for some operations, such as FileMock.CopyTo.
         /// </summary>
-        [NotNull]
+        [CanBeNull]
         public virtual FileSystemMock FileSystem {
             get { return _fileSystem; }
             set {

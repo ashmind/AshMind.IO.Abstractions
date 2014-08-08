@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>AshMind.IO.Abstractions.Mocks</id>
-    <version>0.9.0-pre-m2</version> <!-- Note: Please keep in sync with AssemblyInfo.cs version -->
+    <version>0.9.0-pre-m3</version> <!-- Note: Please keep in sync with AssemblyInfo.cs version -->
     <authors>Andrey Shchekin</authors>
     <owners>Andrey Shchekin</owners>
     <projectUrl>https://github.com/ashmind/AshMind.IO.Abstractions</projectUrl>

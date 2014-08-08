@@ -29,6 +29,19 @@ namespace AshMind.IO.Abstractions.Mocks {
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
 
+        public override FileSystemMock FileSystem {
+            get {
+                if (base.FileSystem != null)
+                    return base.FileSystem;
+
+                if (this.Parent != null)
+                    return Parent.FileSystem;
+
+                return null;
+            }
+            set { base.FileSystem = value; }
+        }
+
         public void AddFileSystemInfo([NotNull] FileSystemInfoMock fileSystemInfo) {
             var file = fileSystemInfo as FileMock;
             if (file != null) {
@@ -46,16 +59,15 @@ namespace AshMind.IO.Abstractions.Mocks {
         }
 
         public void AddDirectory([NotNull] DirectoryMock directory) {
-            directory.FileSystem = this.FileSystem;
             directory.Parent = this;
             _items.Add(directory);
         }
 
         public void AddFile([NotNull] FileMock file) {
-            file.FileSystem = this.FileSystem;
             file.Directory = this;
             _items.Add(file);
         }
+
         
         public virtual IDirectory CreateSubdirectory(string path) {
             var directory = new DirectoryMock(Path.GetFileName(path)) {
@@ -87,8 +99,8 @@ namespace AshMind.IO.Abstractions.Mocks {
             }
         }
 
-        public IDirectory Parent { get; set; }
-        public IDirectory Root { get; set; }
+        public DirectoryMock Parent { get; set; }
+        public DirectoryMock Root { get; set; }
 
         [NotNull]
         public DirectoryMock GetDirectory([NotNull] string name) {
@@ -142,64 +154,108 @@ namespace AshMind.IO.Abstractions.Mocks {
             throw new NotImplementedException();
         }
 
-        public IFile[] GetFiles() {
+        [NotNull]
+        public FileMock[] GetFiles() {
+            return EnumerateFiles().ToArray();
+        }
+
+        [NotNull]
+        public DirectoryMock[] GetDirectories() {
+            return EnumerateDirectories().ToArray();
+        }
+
+        [NotNull]
+        public FileSystemInfoMock[] GetFileSystemInfos() {
+            return EnumerateFileSystemInfos().ToArray();
+        }
+
+        [NotNull]
+        public IEnumerable<FileMock> EnumerateFiles() {
+            return EnumerateFileSystemInfos().OfType<FileMock>();
+        }
+
+        [NotNull]
+        public IEnumerable<DirectoryMock> EnumerateDirectories() {
+            return EnumerateFileSystemInfos().OfType<DirectoryMock>();
+        }
+
+        [NotNull]
+        public IEnumerable<FileSystemInfoMock> EnumerateFileSystemInfos() {
+            return _items;
+        }
+
+        public void MoveTo(string destDirName) {
             throw new NotImplementedException();
         }
 
-        public IFile[] GetFiles(string searchPattern) {
-            throw new NotImplementedException();
+        #region IDirectory Members
+
+        IDirectory IDirectory.Root {
+            get { return Root; }
         }
 
-        public IFile[] GetFiles(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
+        IDirectory IDirectory.Parent {
+            get { return Parent; }
         }
 
-        public IDirectory[] GetDirectories() {
-            throw new NotImplementedException();
+        IFile[] IDirectory.GetFiles() {
+            return ((IDirectory)this).EnumerateFiles().ToArray();
         }
 
-        public IDirectory[] GetDirectories(string searchPattern) {
-            throw new NotImplementedException();
+        IFile[] IDirectory.GetFiles(string searchPattern) {
+            return ((IDirectory)this).EnumerateFiles(searchPattern).ToArray();
         }
 
-        public IDirectory[] GetDirectories(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
+        IFile[] IDirectory.GetFiles(string searchPattern, SearchOption searchOption) {
+            return ((IDirectory)this).EnumerateFiles(searchPattern, searchOption).ToArray();
         }
 
-        public IFileSystemInfo[] GetFileSystemInfos() {
-            throw new NotImplementedException();
+        IDirectory[] IDirectory.GetDirectories() {
+            return ((IDirectory)this).EnumerateDirectories().ToArray();
         }
 
-        public IFileSystemInfo[] GetFileSystemInfos(string searchPattern) {
-            throw new NotImplementedException();
+        IDirectory[] IDirectory.GetDirectories(string searchPattern) {
+            return ((IDirectory)this).EnumerateDirectories(searchPattern).ToArray();
         }
 
-        public IFileSystemInfo[] GetFileSystemInfos(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
+        IDirectory[] IDirectory.GetDirectories(string searchPattern, SearchOption searchOption) {
+            return ((IDirectory)this).EnumerateDirectories(searchPattern, searchOption).ToArray();
         }
 
-        public IEnumerable<IFile> EnumerateFiles() {
-            throw new NotImplementedException();
+        IFileSystemInfo[] IDirectory.GetFileSystemInfos() {
+            return ((IDirectory)this).EnumerateFileSystemInfos().ToArray();
         }
 
-        public IEnumerable<IFile> EnumerateFiles(string searchPattern) {
-            throw new NotImplementedException();
+        IFileSystemInfo[] IDirectory.GetFileSystemInfos(string searchPattern) {
+            return ((IDirectory)this).EnumerateFileSystemInfos(searchPattern).ToArray();
         }
 
-        public IEnumerable<IFile> EnumerateFiles(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
+        IFileSystemInfo[] IDirectory.GetFileSystemInfos(string searchPattern, SearchOption searchOption) {
+            return ((IDirectory)this).EnumerateFileSystemInfos(searchPattern, searchOption).ToArray();
         }
 
-        public IEnumerable<IDirectory> EnumerateDirectories() {
-            throw new NotImplementedException();
+        IEnumerable<IFile> IDirectory.EnumerateFiles() {
+            return ((IDirectory)this).EnumerateFileSystemInfos().OfType<IFile>();
         }
 
-        public IEnumerable<IDirectory> EnumerateDirectories(string searchPattern) {
-            throw new NotImplementedException();
+        IEnumerable<IFile> IDirectory.EnumerateFiles(string searchPattern) {
+            return ((IDirectory)this).EnumerateFileSystemInfos(searchPattern).OfType<IFile>();
         }
 
-        public IEnumerable<IDirectory> EnumerateDirectories(string searchPattern, SearchOption searchOption) {
-            throw new NotImplementedException();
+        IEnumerable<IFile> IDirectory.EnumerateFiles(string searchPattern, SearchOption searchOption) {
+            return ((IDirectory)this).EnumerateFileSystemInfos(searchPattern, searchOption).OfType<IFile>();
+        }
+
+        IEnumerable<IDirectory> IDirectory.EnumerateDirectories() {
+            return ((IDirectory)this).EnumerateFileSystemInfos().OfType<IDirectory>();
+        }
+
+        IEnumerable<IDirectory> IDirectory.EnumerateDirectories(string searchPattern) {
+            return ((IDirectory)this).EnumerateFileSystemInfos(searchPattern).OfType<IDirectory>();
+        }
+
+        IEnumerable<IDirectory> IDirectory.EnumerateDirectories(string searchPattern, SearchOption searchOption) {
+            return ((IDirectory)this).EnumerateFileSystemInfos(searchPattern, searchOption).OfType<IDirectory>();
         }
 
         IEnumerable<IFileSystemInfo> IDirectory.EnumerateFileSystemInfos() {
@@ -215,10 +271,6 @@ namespace AshMind.IO.Abstractions.Mocks {
             // ReSharper disable once PossibleNullReferenceException
             return _items.Where(i => i.Exists && patternRegex.IsMatch(i.Name));
         }
-
-        public void MoveTo(string destDirName) {
-            throw new NotImplementedException();
-        }
         
         IDirectory IDirectory.GetDirectory(string name) {
             return this.GetDirectory(name);
@@ -231,6 +283,8 @@ namespace AshMind.IO.Abstractions.Mocks {
         IFileSystemInfo IDirectory.GetFileSystemInfo(string name) {
             return this.GetFileSystemInfo(name);
         }
+
+        #endregion
 
         #region IEnumerable<FileSystemInfoMock> Members
 

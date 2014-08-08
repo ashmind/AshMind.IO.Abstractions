@@ -13,17 +13,21 @@ namespace AshMind.IO.Abstractions.Mocks {
         [NotNull] private MemoryStream _data = new MemoryStream();
         [CanBeNull] private string _fullName;
 
-        public FileMock([NotNull] string name, [CanBeNull] string contents, [CanBeNull] Encoding encoding = null) : this(name) {
+        public FileMock([NotNull] string name, [CanBeNull] string contents, [CanBeNull] Encoding encoding = null)
+            : this(name)
+        {
             // ReSharper disable once DoNotCallOverridableMethodsInConstructor
             WriteAllText(contents, encoding ?? Encoding.UTF8);
         }
 
-        public FileMock([NotNull] string name, [NotNull] byte[] contents) : this(name) {
+        public FileMock([NotNull] string name, [NotNull] byte[] contents)
+            : this(name)
+        {
             // ReSharper disable once DoNotCallOverridableMethodsInConstructor
             WriteAllBytes(contents);
         }
-        
-        private FileMock([NotNull] string name) {
+
+        public FileMock([NotNull] string name) : base(name) {
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
             Name = name;
             Extension = Path.GetExtension(this.Name);
@@ -35,7 +39,7 @@ namespace AshMind.IO.Abstractions.Mocks {
             get { return Directory != null ? Directory.FullName : null; }
         }
 
-        public IDirectory Directory { get; set; }
+        public DirectoryMock Directory { get; set; }
         public override string FullName {
             get {
                 if (_fullName != null)
@@ -47,6 +51,19 @@ namespace AshMind.IO.Abstractions.Mocks {
                 return Path.Combine(this.DirectoryName, this.Name);
             }
             set { _fullName = value; }
+        }
+
+        public override FileSystemMock FileSystem {
+            get {
+                if (base.FileSystem != null)
+                    return base.FileSystem;
+
+                if (this.Directory != null)
+                    return Directory.FileSystem;
+
+                return null;
+            } 
+            set { base.FileSystem = value; }
         }
 
         public long Length {
@@ -84,8 +101,11 @@ namespace AshMind.IO.Abstractions.Mocks {
         public IFile CopyTo(string destFileName, bool overwrite) {
             EnsureExists();
 
+            if (FileSystem == null)
+                throw new InvalidOperationException("FileMock FileSystem property should be set before copying is possible.");
+
             var file = FileSystem.GetFile(destFileName);
-            if (file == null) {
+            if (!file.Exists) {
                 file = new FileMock(Path.GetFileName(destFileName), _data.ToArray()) {
                     FullName = destFileName
                 };
@@ -231,6 +251,10 @@ namespace AshMind.IO.Abstractions.Mocks {
 
         public void AppendAllLines(IEnumerable<string> contents, Encoding encoding) {
             throw new NotImplementedException();
+        }
+
+        IDirectory IFile.Directory {
+            get { return Directory; }
         }
     }
 }

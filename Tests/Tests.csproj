@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Internal\ReflectionDataAttribute.cs" />
+    <Compile Include="Of.Mocks\DirectoryMockTests.cs" />
     <Compile Include="Of.Mocks\FileMockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
