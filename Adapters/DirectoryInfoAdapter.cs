@@ -131,16 +131,16 @@ namespace AshMind.IO.Abstractions.Adapters {
             get { return AdapterHelper.Adapt(_directoryInfo.Root); }
         }
         
-        public virtual IDirectory GetDirectory(string name, GetOption option = GetOption.Existing) {
-            return AdapterHelper.GetDirectory(Path.Combine(_directoryInfo.FullName, name), option);
+        public virtual IDirectory GetDirectory(string name) {
+            return AdapterHelper.GetDirectory(Path.Combine(_directoryInfo.FullName, name));
         }
 
-        public virtual IFile GetFile(string name, GetOption option = GetOption.Existing) {
-            return AdapterHelper.GetFile(Path.Combine(_directoryInfo.FullName, name), option);
+        public virtual IFile GetFile(string name) {
+            return AdapterHelper.GetFile(Path.Combine(_directoryInfo.FullName, name));
         }
 
-        public virtual IFileSystemInfo GetFileSystemInfo(string name, GetOption option = GetOption.Existing) {
-            return AdapterHelper.GetFileSystemInfo(Path.Combine(_directoryInfo.FullName, name), option);
+        public virtual IFileSystemInfo GetFileSystemInfo(string name) {
+            return AdapterHelper.GetFileSystemInfo(Path.Combine(_directoryInfo.FullName, name));
         }
     }
 }

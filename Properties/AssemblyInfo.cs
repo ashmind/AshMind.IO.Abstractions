@@ -29,7 +29,7 @@ using AshMind.IO.Abstractions.Properties;
 
 namespace AshMind.IO.Abstractions.Properties {
     internal static class AssemblyInfo {
-        public const string VersionString = "0.8.1.0";
+        public const string VersionString = "0.9.0.0";
         public const string VersionStringFull = VersionString + "-pre";
     }
 }

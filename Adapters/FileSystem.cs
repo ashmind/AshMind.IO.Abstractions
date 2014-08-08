@@ -4,16 +4,16 @@ using System.Linq;
 
 namespace AshMind.IO.Abstractions.Adapters {
     public class FileSystem : IFileSystem {
-        public virtual IDirectory GetDirectory(string path, GetOption option = GetOption.Existing) {
-            return AdapterHelper.GetDirectory(path, option);
+        public virtual IDirectory GetDirectory(string path) {
+            return AdapterHelper.GetDirectory(path);
         }
 
-        public virtual IFile GetFile(string path, GetOption option = GetOption.Existing) {
-            return AdapterHelper.GetFile(path, option);
+        public virtual IFile GetFile(string path) {
+            return AdapterHelper.GetFile(path);
         }
 
-        public IFileSystemInfo GetFileSystemInfo(string path, GetOption option = GetOption.Existing) {
-            return AdapterHelper.GetFileSystemInfo(path, option);
+        public IFileSystemInfo GetFileSystemInfo(string path) {
+            return AdapterHelper.GetFileSystemInfo(path);
         }
     }
 }

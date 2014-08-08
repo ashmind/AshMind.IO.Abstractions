@@ -12,6 +12,7 @@ namespace AshMind.IO.Abstractions.Mocks {
             Name = name;
             Extension = Path.GetExtension(this.Name);
             Exists = true;
+            FileSystem = new FileSystemMock();
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
         

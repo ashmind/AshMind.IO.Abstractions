@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using AshMind.IO.Abstractions.Bases;
 using JetBrains.Annotations;
 
 namespace AshMind.IO.Abstractions.Mocks {
@@ -21,40 +20,37 @@ namespace AshMind.IO.Abstractions.Mocks {
             _items.Add(fileSystemInfo);
         }
 
-        public DirectoryMock GetDirectory(string path, GetOption option = GetOption.Existing) {
+        [NotNull]
+        public DirectoryMock GetDirectory([NotNull] string path) {
+            // ReSharper disable once PossibleNullReferenceException
             var item = _items.OfType<DirectoryMock>().SingleOrDefault(i => i.FullName == path);
-            if (item != null || option == GetOption.Existing)
-                return item;
-
-            return new DirectoryMock(Path.GetFileName(path)) { FullName = path, Exists = false };
+            return item ?? new DirectoryMock(Path.GetFileName(path)) { FullName = path, Exists = false };
         }
 
-        public FileMock GetFile(string path, GetOption option = GetOption.Existing) {
+        [NotNull]
+        public FileMock GetFile([NotNull] string path) {
+            // ReSharper disable once PossibleNullReferenceException
             var item = _items.OfType<FileMock>().SingleOrDefault(i => i.FullName == path);
-            if (item != null || option == GetOption.Existing)
-                return item;
-
-            return new FileMock(Path.GetFileName(path), "") { FullName = path, Exists = false };
+            return item ?? new FileMock(Path.GetFileName(path), "") { FullName = path, Exists = false };
         }
 
-        public FileSystemInfoMock GetFileSystemInfo(string path, GetOption option = GetOption.Existing) {
+        [NotNull]
+        public FileSystemInfoMock GetFileSystemInfo([NotNull] string path) {
+            // ReSharper disable once PossibleNullReferenceException
             var item = _items.SingleOrDefault(i => i.FullName == path);
-            if (item != null || option == GetOption.Existing)
-                return item;
-
-            return new FileSystemInfoMock(Path.GetFileName(path)) { FullName = path, Exists = false };
+            return item ?? new FileSystemInfoMock(Path.GetFileName(path)) { FullName = path, Exists = false };
         }
 
-        IDirectory IFileSystem.GetDirectory(string path, GetOption option = GetOption.Existing) {
-            return GetDirectory(path, option);
+        IDirectory IFileSystem.GetDirectory(string path) {
+            return GetDirectory(path);
         }
 
-        IFile IFileSystem.GetFile(string path, GetOption option = GetOption.Existing) {
-            return GetFile(path, option);
+        IFile IFileSystem.GetFile(string path) {
+            return GetFile(path);
         }
 
-        IFileSystemInfo IFileSystem.GetFileSystemInfo(string path, GetOption option = GetOption.Existing) {
-            return GetFileSystemInfo(path, option);
+        IFileSystemInfo IFileSystem.GetFileSystemInfo(string path) {
+            return GetFileSystemInfo(path);
         }
 
         #region IEnumerable<FileSystemInfoMock> Members

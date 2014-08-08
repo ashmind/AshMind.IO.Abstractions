@@ -90,27 +90,30 @@ namespace AshMind.IO.Abstractions.Mocks {
         public IDirectory Parent { get; set; }
         public IDirectory Root { get; set; }
 
-        public DirectoryMock GetDirectory([NotNull] string name, GetOption option = GetOption.Existing) {
-            return GetItem(name, option, () => new DirectoryMock(name) { Exists = false });
+        [NotNull]
+        public DirectoryMock GetDirectory([NotNull] string name) {
+            return GetItem(name, () => new DirectoryMock(name) { Exists = false });
         }
 
-        public FileMock GetFile([NotNull] string name, GetOption option = GetOption.Existing) {
-            return GetItem(name, option, () => new FileMock(name, "") { Exists = false });
+        [NotNull]
+        public FileMock GetFile([NotNull] string name) {
+            return GetItem(name, () => new FileMock(name, "") { Exists = false });
         }
 
-        public FileSystemInfoMock GetFileSystemInfo([NotNull] string name, GetOption option = GetOption.Existing) {
-            return GetItem(name, option, () => new FileSystemInfoMock(name) { Exists = false });
+        [NotNull]
+        public FileSystemInfoMock GetFileSystemInfo([NotNull] string name) {
+            return GetItem(name, () => new FileSystemInfoMock(name) { Exists = false });
         }
 
-        private T GetItem<T>(string name, GetOption option, [CanBeNull] Func<T> defaultFactory)
+        [NotNull]
+        private T GetItem<T>(string name, [NotNull] Func<T> defaultFactory)
             where T : FileSystemInfoMock
         {
             // ReSharper disable once PossibleNullReferenceException
             var existing = _items.OfType<T>().SingleOrDefault(i => i.Name == name);
-            if (existing == null && option == GetOption.Existing)
-                return null;
 
             // ReSharper disable once PossibleNullReferenceException
+            // ReSharper disable once AssignNullToNotNullAttribute
             return existing ?? defaultFactory();
         }
         
@@ -217,16 +220,16 @@ namespace AshMind.IO.Abstractions.Mocks {
             throw new NotImplementedException();
         }
         
-        IDirectory IDirectory.GetDirectory(string name, GetOption option) {
-            return this.GetDirectory(name, option);
+        IDirectory IDirectory.GetDirectory(string name) {
+            return this.GetDirectory(name);
         }
 
-        IFile IDirectory.GetFile(string name, GetOption option) {
-            return this.GetFile(name, option);
+        IFile IDirectory.GetFile(string name) {
+            return this.GetFile(name);
         }
 
-        IFileSystemInfo IDirectory.GetFileSystemInfo(string name, GetOption option) {
-            return this.GetFileSystemInfo(name, option);
+        IFileSystemInfo IDirectory.GetFileSystemInfo(string name) {
+            return this.GetFileSystemInfo(name);
         }
 
         #region IEnumerable<FileSystemInfoMock> Members

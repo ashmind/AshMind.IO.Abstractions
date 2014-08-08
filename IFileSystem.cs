@@ -6,8 +6,8 @@ using JetBrains.Annotations;
 namespace AshMind.IO.Abstractions {
     [PublicAPI]
     public interface IFileSystem {
-        [PublicAPI, CanBeNull] IDirectory GetDirectory([NotNull] string path, GetOption option = GetOption.Existing);
-        [PublicAPI, CanBeNull] IFile GetFile([NotNull] string path, GetOption option = GetOption.Existing);
-        [PublicAPI, CanBeNull] IFileSystemInfo GetFileSystemInfo([NotNull] string path, GetOption option = GetOption.Existing);
+        [PublicAPI, NotNull] IDirectory GetDirectory([NotNull] string path);
+        [PublicAPI, NotNull] IFile GetFile([NotNull] string path);
+        [PublicAPI, NotNull] IFileSystemInfo GetFileSystemInfo([NotNull] string path);
     }
 }

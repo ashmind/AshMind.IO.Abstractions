@@ -44,8 +44,8 @@ namespace AshMind.IO.Abstractions {
         [CanBeNull] IDirectory Parent { get; }
         [CanBeNull] IDirectory Root { get; }
 
-        [CanBeNull] IDirectory GetDirectory([NotNull] string name, GetOption option = GetOption.Existing);
-        [CanBeNull] IFile GetFile([NotNull] string name, GetOption option = GetOption.Existing);
-        [PublicAPI, CanBeNull] IFileSystemInfo GetFileSystemInfo([NotNull] string name, GetOption option = GetOption.Existing);
+        [CanBeNull] IDirectory GetDirectory([NotNull] string name);
+        [CanBeNull] IFile GetFile([NotNull] string name);
+        [PublicAPI, CanBeNull] IFileSystemInfo GetFileSystemInfo([NotNull] string name);
     }
 }

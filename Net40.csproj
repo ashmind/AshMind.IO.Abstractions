@@ -132,7 +132,6 @@
     <Compile Include="Bases\DirectoryBase.cs" />
     <Compile Include="Bases\FileBase.cs" />
     <Compile Include="Bases\FileSystemInfoBase.cs" />
-    <Compile Include="GetOption.cs" />
     <Compile Include="IDirectory.cs" />
     <Compile Include="IFile.cs" />
     <Compile Include="IFileSystem.cs" />

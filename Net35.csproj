@@ -56,7 +56,6 @@
     <Compile Include="Bases\FileSystemBase.cs" />
     <Compile Include="Bases\FileSystemInfoBase.cs" />
     <Compile Include="Bases\FileSystemSecurityBase.cs" />
-    <Compile Include="GetOption.cs" />
     <Compile Include="IDirectory.cs" />
     <Compile Include="IFile.cs" />
     <Compile Include="IFileSystem.cs" />
