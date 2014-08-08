@@ -1,27 +1,34 @@
 ﻿using System;
 using System.IO;
-using AshMind.IO.Abstractions.Bases;
 using JetBrains.Annotations;
 
 namespace AshMind.IO.Abstractions.Mocks {
-    public class FileSystemInfoMock : FileSystemInfoBase, IFileSystemInfo {
+    public class FileSystemInfoMock : IFileSystemInfo {
         [CanBeNull] private string _fullName;
-        
+        [NotNull] private FileSystemMock _fileSystem;
+
         public FileSystemInfoMock([NotNull] string name = "") {
+            // ReSharper disable DoNotCallOverridableMethodsInConstructor
             Name = name;
             Extension = Path.GetExtension(this.Name);
             Exists = true;
+            // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
         
-        public override void Delete() {
+        public virtual void Delete() {
             Exists = false;
         }
-        
-        public override void Refresh() {
+
+        public virtual void Refresh() {
         }
 
-        public new string Extension { get; set; }
-        public new string FullName {
+        protected void EnsureExists() {
+            if (!this.Exists)
+                throw new FileNotFoundException("'" + this.FullName + "' does not exist.");
+        }
+
+        public virtual string Extension { get; set; }
+        public virtual string FullName {
             get {
                 if (_fullName != null)
                     return _fullName;
@@ -31,12 +38,40 @@ namespace AshMind.IO.Abstractions.Mocks {
             set { _fullName = value; }
         }
 
-        public new string Name { get; set; }
-        public new bool Exists { get; set; }
+        public virtual string Name { get; set; }
+        public virtual bool Exists { get; set; }
 
-        public override DateTime CreationTimeUtc { get; set; }
-        public override DateTime LastAccessTimeUtc { get; set; }
-        public override DateTime LastWriteTimeUtc { get; set; }
-        public override FileAttributes Attributes { get; set; }
+        public virtual DateTime CreationTimeUtc { get; set; }
+        public virtual DateTime LastAccessTimeUtc { get; set; }
+        public virtual DateTime LastWriteTimeUtc { get; set; }
+        public virtual FileAttributes Attributes { get; set; }
+
+        public virtual DateTime CreationTime {
+            get { return CreationTimeUtc.ToLocalTime(); }
+            set { CreationTimeUtc = value.ToUniversalTime(); }
+        }
+
+        public virtual DateTime LastAccessTime {
+            get { return LastAccessTimeUtc.ToLocalTime(); }
+            set { LastAccessTimeUtc = value.ToUniversalTime(); }
+        }
+
+        public virtual DateTime LastWriteTime {
+            get { return LastWriteTimeUtc.ToLocalTime(); }
+            set { LastWriteTimeUtc = value.ToUniversalTime(); }
+        }
+
+        /// <summary>
+        /// Represents the mock FileSystem the item is in.
+        /// This is required for some operations, such as FileMock.CopyTo.
+        /// </summary>
+        [NotNull]
+        public virtual FileSystemMock FileSystem {
+            get { return _fileSystem; }
+            set {
+                value.AddFileSystemInfoInternalWithoutSettingFileSystem(this);
+                _fileSystem = value;
+            }
+        }
     }
 }
