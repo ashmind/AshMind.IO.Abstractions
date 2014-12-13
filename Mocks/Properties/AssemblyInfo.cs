@@ -26,7 +26,7 @@ using AshMind.IO.Abstractions.Mocks.Properties;
 
 namespace AshMind.IO.Abstractions.Mocks.Properties {
     internal static class AssemblyInfo {
-        public const string VersionString = Abstractions.Properties.AssemblyInfo.VersionString;
-        public const string VersionStringFull = Abstractions.Properties.AssemblyInfo.VersionString + "-m3";
+        public const string VersionString = "0.9.1";
+        public const string VersionStringFull = VersionString + "-pre7";
     }
 }

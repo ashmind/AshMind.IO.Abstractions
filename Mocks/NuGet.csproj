@@ -31,6 +31,6 @@
   <Target Name="Build" DependsOnTargets="PrepareForBuild; ResolveReferences; _CopySourceItemsToOutputDirectory; CreateNuGetPackage">
   </Target>
   <Target Name="CreateNuGetPackage">
-    <Exec WorkingDirectory="$(OutDir)" Command="$(SolutionDir)\.nuget\nuget pack AshMind.IO.Abstractions.Mocks.nuspec" />
+    <Exec WorkingDirectory="$(OutDir)" Command="&quot;$(SolutionDir)\.nuget\nuget&quot; pack AshMind.IO.Abstractions.Mocks.nuspec" />
   </Target>
 </Project>

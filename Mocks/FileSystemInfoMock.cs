@@ -67,10 +67,7 @@ namespace AshMind.IO.Abstractions.Mocks {
         [CanBeNull]
         public virtual FileSystemMock FileSystem {
             get { return _fileSystem; }
-            set {
-                value.AddFileSystemInfoInternalWithoutSettingFileSystem(this);
-                _fileSystem = value;
-            }
+            set { _fileSystem = value; }
         }
     }
 }

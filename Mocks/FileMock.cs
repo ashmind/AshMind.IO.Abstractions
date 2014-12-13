@@ -13,7 +13,7 @@ namespace AshMind.IO.Abstractions.Mocks {
         [NotNull] private MemoryStream _data = new MemoryStream();
         [CanBeNull] private string _fullName;
 
-        public FileMock([NotNull] string name, [CanBeNull] string contents, [CanBeNull] Encoding encoding = null)
+        public FileMock([NotNull] string name, [CanBeNull] string contents = "", [CanBeNull] Encoding encoding = null)
             : this(name)
         {
             // ReSharper disable once DoNotCallOverridableMethodsInConstructor
@@ -109,7 +109,7 @@ namespace AshMind.IO.Abstractions.Mocks {
                 file = new FileMock(Path.GetFileName(destFileName), _data.ToArray()) {
                     FullName = destFileName
                 };
-                FileSystem.AddFile(file);
+                FileSystem.Add(file);
             }
             else if (overwrite) {
                 file.WriteAllBytes(this.ReadAllBytes());

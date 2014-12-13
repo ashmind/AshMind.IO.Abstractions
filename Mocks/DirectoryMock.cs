@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using AshMind.IO.Abstractions.Mocks.Internal;
 using AshMind.IO.Abstractions.Security;
 using JetBrains.Annotations;
 
@@ -24,7 +25,7 @@ namespace AshMind.IO.Abstractions.Mocks {
             Exists = true;
             foreach (var item in items) {
                 // ReSharper disable once AssignNullToNotNullAttribute
-                AddFileSystemInfo(item);
+                Add(item);
             }
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
@@ -42,36 +43,24 @@ namespace AshMind.IO.Abstractions.Mocks {
             set { base.FileSystem = value; }
         }
 
-        public void AddFileSystemInfo([NotNull] FileSystemInfoMock fileSystemInfo) {
-            var file = fileSystemInfo as FileMock;
-            if (file != null) {
-                AddFile(file);
-                return;
-            }
-
-            var directory = fileSystemInfo as DirectoryMock;
-            if (directory != null) {
-                AddDirectory(directory);
-                return;
-            }
-
-            throw new NotSupportedException("Item should be either FileMock or a DirectoryMock (received " + fileSystemInfo.GetType() + ").");
+        public void Add([NotNull] FileSystemInfoMock fileSystemInfo) {
+            MockHelper.Choose(fileSystemInfo, Add, Add);
         }
 
-        public void AddDirectory([NotNull] DirectoryMock directory) {
+        public void Add([NotNull] DirectoryMock directory) {
             directory.Parent = this;
             _items.Add(directory);
         }
 
-        public void AddFile([NotNull] FileMock file) {
+        public void Add([NotNull] FileMock file) {
             file.Directory = this;
             _items.Add(file);
         }
-
         
         public virtual IDirectory CreateSubdirectory(string path) {
             var directory = new DirectoryMock(Path.GetFileName(path)) {
-                FullName = Path.Combine(this.FullName, path)
+                FullName = Path.Combine(this.FullName, path),
+                Parent = this
             };
             _items.Add(directory);
             return directory;
@@ -96,6 +85,7 @@ namespace AshMind.IO.Abstractions.Mocks {
                     // ReSharper disable once PossibleNullReferenceException
                     item.Delete();
                 }
+                _items.Clear();
             }
         }
 
@@ -104,17 +94,17 @@ namespace AshMind.IO.Abstractions.Mocks {
 
         [NotNull]
         public DirectoryMock GetDirectory([NotNull] string name) {
-            return GetItem(name, () => new DirectoryMock(name) { Exists = false });
+            return GetItem(name, () => new DirectoryMock(name));
         }
 
         [NotNull]
         public FileMock GetFile([NotNull] string name) {
-            return GetItem(name, () => new FileMock(name, "") { Exists = false });
+            return GetItem(name, () => new FileMock(name));
         }
 
         [NotNull]
         public FileSystemInfoMock GetFileSystemInfo([NotNull] string name) {
-            return GetItem(name, () => new FileSystemInfoMock(name) { Exists = false });
+            return GetItem(name, () => new FileSystemInfoMock(name));
         }
 
         [NotNull]
@@ -123,10 +113,13 @@ namespace AshMind.IO.Abstractions.Mocks {
         {
             // ReSharper disable once PossibleNullReferenceException
             var existing = _items.OfType<T>().SingleOrDefault(i => i.Name == name);
+            if (existing != null)
+                return existing;
 
+            var @default = defaultFactory();
             // ReSharper disable once PossibleNullReferenceException
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return existing ?? defaultFactory();
+            @default.Exists = false;
+            return @default;
         }
         
         public override string FullName {

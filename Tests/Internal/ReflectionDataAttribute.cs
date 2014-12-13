@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 using Xunit.Extensions;
 
 namespace AshMind.IO.Abstractions.Tests.Internal {
@@ -21,7 +22,9 @@ namespace AshMind.IO.Abstractions.Tests.Internal {
         public string NamePattern { get; set; }
 
         public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes) {
-            var members = _targetType.FindMembers(_memberTypes, _bindingFlags, (m, _) => Regex.IsMatch(m.Name, NamePattern), null);
+            var members = _targetType.FindMembers(_memberTypes, _bindingFlags, 
+                (m, _) => Regex.IsMatch(m.Name, NamePattern) && m.DeclaringType != typeof(object),
+            null);
             return members.Select(m => new object[] { m });
         }
     }

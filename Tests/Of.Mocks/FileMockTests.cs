@@ -21,9 +21,9 @@ namespace AshMind.IO.Abstractions.Tests.Of.Mocks {
 
         [Fact]
         public void CopyTo_OverwritesTargetFileContents_IfTargetFileExistsAndOverwriteIsTrue() {
-            var fileSystem = new FileSystemMock();
-            var source = new FileMock("test1", "Source") { FileSystem = fileSystem };
-            var target = new FileMock("test2", "Target") { FileSystem = fileSystem };
+            var source = new FileMock("test1", "Source");
+            var target = new FileMock("test2", "Target");
+            new FileSystemMock(source, target);
 
             source.CopyTo(target.FullName, true);
 
